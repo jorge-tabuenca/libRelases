@@ -4,19 +4,21 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Language_Course")
-public class LanguageCourse implements Serializable{
+public class LanguageCourse implements Serializable {
 	
-	@Id
+	@Id	
 	@Column(name = "LANGUAGE_ID")
 	private short language_ID;
-	
-	@Id
+
+	@Id	
 	@Column(name = "COURSE_ID")
 	private short course_ID;
+	
+	@OneToMany(mappedBy = "language_course_id", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Category> categories;
 
 	public LanguageCourse() {
 		
@@ -46,12 +48,8 @@ public class LanguageCourse implements Serializable{
 
 	@Override
 	public String toString() {
-		return "LanguageCourse [language_ID=" + language_ID + ", course_ID=" + course_ID + "]";
+		return "LanguageCourse [language_ID=" + language_ID + ", course_ID=" + course_ID
+				+ ", categories=" + categories + "]";
 	}
 	
-	
-	
-	
-	
-
 }
