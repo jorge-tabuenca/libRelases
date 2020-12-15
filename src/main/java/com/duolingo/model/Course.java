@@ -18,14 +18,6 @@ public class Course {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Course_Category",
-            joinColumns = { @JoinColumn(name = "Course_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "Category_ID") }
-    )
-    private Set<Category> categories;
-
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
             name = "Actual_Course",
             joinColumns = { @JoinColumn(name = "Course_ID") },
             inverseJoinColumns = { @JoinColumn(name = "User_ID") }
@@ -46,11 +38,10 @@ public class Course {
     }
 
 
-	public Course(short id, String name, Set<Category> categories, Set<User> users, Set<Language> languages) {
+	public Course(short id, String name, Set<User> users, Set<Language> languages) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.categories = categories;
 		this.users = users;
 		this.languages = languages;
 	}
@@ -76,16 +67,6 @@ public class Course {
 	}
 
 
-	public Set<Category> getCategories() {
-		return categories;
-	}
-
-
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-
-
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -108,7 +89,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", name=" + name + ", categories=" + categories + ", users=" + users
+		return "Course [id=" + id + ", name=" + name + ", users=" + users
 				+ ", languages=" + languages + "]";
 	}
 }
